@@ -1,0 +1,27 @@
+extends ../layout
+include ../mixins/nav
+include ../mixins/footer
+
+block nav
+    +nav(isLoggedIn)
+block styles 
+block content
+    .login-register-form             
+        form.login(method='POST', action='/auth/login')
+            .login-header
+                h1#login-sign Login
+            .login-form
+                input(name="username" type='text', placeholder='Username' required)
+                br
+                input(name="password" type='password', placeholder='Password' required)
+                br
+                input#login-button.login-button(type='submit', value='Login')
+                |
+                p
+                if(messages)
+                div#note.alert-danger #{messages}
+block footer
+    +footer
+
+
+            

@@ -1,0 +1,22 @@
+extends layout
+include mixins/nav
+include mixins/footer
+
+block nav
+    +nav(isLoggedIn)
+block content
+    main
+        .container
+            if isLoggedIn
+                .row
+                    .col-lg-12.col-lg-offset-2
+                        - const lectureUrl = lecture.url.replace("watch?v=", "embed/");
+                        h1= course.title
+                        h2 Lecture ##{lecture.number} #{lecture.title}
+                        iframe#my-iframe(src=lecture.url allowfullscreen)
+                        .row
+                        a(href='/courses/' + course._id + '/lectures').btn.btn-danger Go back
+            else
+                h1 Unauthorized
+block footer
+    +footer

@@ -1,0 +1,61 @@
+extends layout
+include mixins/nav
+include mixins/footer
+
+
+block nav
+    +nav(isLoggedIn)
+block content
+    main
+        .jumbotron.full
+            .container
+                br
+                h2#main-slogan Access to the best programming
+                h2#main-slogan courses with just one click!
+                a#jumbotron-button(href='/courses') Check our courses              
+        .container
+            h1.text-center
+                | Most recent courses
+            each c in latestCourses
+                .col-sm-6.col-md-4.course-container
+                    .thumbnail
+                        // image here
+                        img.img-responsive.img-rounded.course-img(src= c.coverPhoto , alt='')
+                        .caption
+                            h3.title-label #{c.title}
+                            p.lecturer-label Lecturer: #{c.lecturer}
+                            p.length-label #{c.length}
+                            a.btn(id='details-button-recent' href='/courses/' + c._id)
+                                | View details
+                            if isLoggedIn
+                                - const canLike = c.usersLiked.find((u) => u._id == String(user[0]._id))
+                                if canLike
+                                    a(class='unlike-button')
+                                        img.img-responsive.img-rounded.like-image(src='/static/images/liked.png', alt='')
+                                else
+                                    a(class='like-button')
+                                        img.img-responsive.img-rounded.unlike-image(src='/static/images/unliked.png', alt='')
+        .container
+            h1.text-center
+                | Most popular courses
+            each c in mostPopularCourses
+                .col-sm-6.col-md-4.course-container
+                    .thumbnail
+                        // image here
+                        img.img-responsive.img-rounded.course-img(src= c.coverPhoto, alt='')
+                        .caption
+                            h3.title-label #{c.title}
+                            p.lecturer-label Lecturer: #{c.lecturer}
+                            p.length-label #{c.length}
+                            a.btn(id='details-button-popular' href='/courses/' + c._id)
+                                | View details
+                            if isLoggedIn
+                                - const canLike = c.usersLiked.find((u) => u._id == String(user[0]._id))
+                                if canLike
+                                    a(class='unlike-button')
+                                        img.img-responsive.img-rounded.like-image(src='/static/images/liked.png', alt='')
+                                else
+                                    a(class='like-button')
+                                        img.img-responsive.img-rounded.unlike-image(src='/static/images/unliked.png', alt='')
+block footer
+    +footer

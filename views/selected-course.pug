@@ -1,0 +1,54 @@
+extends layout
+include mixins/nav
+include mixins/footer
+
+block nav
+    +nav(isLoggedIn)
+block content
+    main
+        - const selectedCourse = course[0]
+        .container
+            .row
+                p
+                |
+                .col-md-8
+                    img.img-responsive.img-rounded(src= selectedCourse.coverPhoto, alt='')
+                .col-md-4
+                    h1 #{selectedCourse.title}
+                    p
+                        | Course description here
+                    -
+                        let canEnroll;
+                        if (isLoggedIn) {
+                            canEnroll = true;
+                            const courseID = String(course[0]._id);
+                            const currentUser = user[0];
+                            currentUser.enrolledCourses.forEach((course) => {
+                                if (course._id == courseID) {
+                                    canEnroll = false;
+                                }
+                            });
+                        }
+                    if (isLoggedIn && canEnroll) 
+                        a.btn.btn-primary.btn-lg.enroll-button Enroll
+                    else if (isLoggedIn && !canEnroll)
+                        h3 You have already enrolled for this course!
+                        a.btn.btn-primary.btn-lg.disenroll-button Disenroll
+                    else
+                        h3 Login to enroll for this course!
+            hr
+            .row
+                .col-lg-12
+                    .well.text-center.lecturer-label
+                        | The Course is taught by #{selectedCourse.lecturer}
+            .row
+                if isLoggedIn
+                    each lecture in course[0].lectures
+                        .col-md-4
+                            h2= lecture.title
+                            p Lecture ##{lecture.number}
+                            a.btn.btn-success(href='/courses/' + course[0]._id + '/lectures/' + lecture.number) Watch video
+                else
+                    h3 Login to view lectures
+block footer
+    +footer

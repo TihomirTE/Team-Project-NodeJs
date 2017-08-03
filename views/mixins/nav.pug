@@ -1,0 +1,39 @@
+mixin nav(isLoggedIn)
+    nav#my-navbar.navbar.navbar-inverse.navbar-custom.navbar-fixed-top
+        .container-fluid
+            .navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='#navbar-collapse')
+                    // Collapses the nav buttons for smaller screens
+                    span#my-bar-one.icon-bar
+                    span#my-bar-two.icon-bar
+                    span#my-bar-three.icon-bar
+                    span#my-bar-four.icon-bar
+                a.navbar-brand(href='/')
+                    img#myLogo(src='/static/images/logo.png', alt='Page logo')
+                form.navbar-form.pull-left(role='   rch')
+                    .input-group
+                        input#search-bar.form-control(type='text', placeholder='Search')
+                        .input-group-btn
+                            button#search-button.btn.btn-default(type='button')
+                                span.glyphicon.glyphicon-search
+            #navbar-collapse.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li
+                        a#courses-nav(href='/courses?page=1') Courses
+                    li
+                        a#chat-nav(href='/chat') Chat
+                ul.nav.navbar-nav.navbar-right
+                    if isLoggedIn
+                        li.dropdown
+                            a#profile-link.dropdown-toggle(href='/profile')
+                                span#user-name= user[0].username
+                        li.dropdown
+                            a#logout-link.dropdown-toggle(href='/auth/logout')
+                                | Logout 
+                    else
+                        li.dropdown
+                            a#login-link.dropdown-toggle(href='/login')
+                                | Log In 
+                        li
+                            a#register-link.dropdown-toggle(href='/register')
+                                | Register

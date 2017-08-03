@@ -1,0 +1,36 @@
+extends layout
+include mixins/nav
+include mixins/footer
+
+block nav
+    +nav(isLoggedIn)
+block content
+    main
+        .container
+            // Introduction Row
+            .row
+                .col-lg-12.col-lg-offset-4
+                    h1.page-header Meet Our Team
+            .row
+                .col-lg-12.col-lg-offset-5
+                    h2.page-header 
+                .col-lg-4.col-sm-6
+                        img.img-circle.img-responsive.img-center(src='static/images/team-photos/ivelin.jpg', alt='')
+                        h3
+                            | nivalen292
+                        p
+                            | Future Code Ninja!
+                .col-lg-4.col-sm-6
+                    img.img-circle.img-responsive.img-center(src='static/images/team-photos/tihomir.jpg', alt='')
+                    h3
+                        | TihomirTE
+                    p
+                        | Future Code Ninja!
+                .col-lg-4.col-sm-6
+                    img.img-circle.img-responsive.img-center(src='static/images/team-photos/milena.jpg', alt='')
+                    h3
+                        | MilenaSh
+                    p
+                        | Future Code Ninja!
+block footer
+    +footer
