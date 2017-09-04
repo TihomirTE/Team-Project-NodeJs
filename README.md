@@ -10,9 +10,6 @@ _Web applications with Node.js for Online learning system_
 | Ivelin        | nivalen292    | https://github.com/nivalen292 |
 | Tihomir       | TihomirTE     | https://github.com/TihomirTE  |
 
-## IP address
-http://52.15.162.255/
-
 ## Getting Started
 
 Install libraries on your machine
